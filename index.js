@@ -1,4 +1,6 @@
-var lengthElement = $("#length").value;
+document.addEventListener("DOMContentLoaded", ready)
+
+var lengthElement = document.getElementById("#length").value;
 var lengthEl = +lengthElement;
 var password = "";
 
@@ -6,43 +8,46 @@ var password = "";
 
 // f() to generate Number Character
 function numChar(){
-    var numEl = $("#numbers");
+    var numEl = document.getElementById("#numbers");
     if(numEl.checked){
         return (String.fromCharCode(Math.floor(Math.random() * 10) + 48));
     }
     else(null)
 };
-console.log(numChar());
 
 // f() to generate Lowercase Character
 function lowCase(){
-    var lowEl = $("#lowercase");
+    var lowEl = document.getElementById("#lowercase");
     if(lowEl.checked){
         return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
     } else(null)
 };
-console.log(lowCase());
         
 // f() to generate Uppercase Character
 function upCase(){
-    var upEl = $("#uppercase");
+    var upEl = document.getElementById("#uppercase");
     if (upEl.checked){
         return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
     } else(null)
 };
-console.log(upCase());
 
 // f() to generate Special Character
 function specChar(){
-    var specEl = $("#special");
+    var specEl = document.getElementById("#special");
     if (specEl.checked){
         return String.fromCharCode(Math.floor(Math.random() * 10) + 33);
     } else(null)
 };
-console.log(specChar());
         
 
 //---Generate Password---//
+
+function genPassword(){
+    numChar();
+    lowCase();
+    upCase();
+    specChar();
+}
 
 function createPassword(){
     var length = lengthEl;
@@ -55,14 +60,14 @@ function createPassword(){
     return returnVal;
 };
 
-        
+
 // Password Generation button
-$("#gen-btn").on("click", function(){
-    var passResult = $("#result");
+document.getElementById("#gen-btn").addEventListener("click", function(){
+    var passResult = document.getElementById("#result");
 });
 
 
 // Copy to Clipboard button
-$("#copy").on("click", function(){
-    var copyClip = $("#copy");
+document.getElementById("#copy").on("click", function(){
+    var copyClip = document.getElementById("#copy");
 })

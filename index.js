@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 var password = "";
-console.log()
+console.log("this is the password array: " + password)
 
 //---Generate Characters---//
 
@@ -22,6 +22,7 @@ function numChar(){
         return (String.fromCharCode(Math.floor(Math.random() * 10) + 48));
     }
     else(null)
+    password.push(result);
 };
 console.log(numChar());
 
@@ -55,11 +56,16 @@ console.log(specChar());
 
 //---Generate Password---//
 
+$('#gen-btn').click(function(){
+    genPassword();
+    console.log(genPassword())
+})
+
 function genPassword(){
-    numChar();
-    lowCase();
-    upCase();
-    specChar();
+    console.log(numChar());
+    console.log(lowCase());
+    console.log(upCase());
+    console.log(specChar());
 }
 console.log(genPassword())
 

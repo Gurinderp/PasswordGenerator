@@ -10,84 +10,107 @@ document.addEventListener("DOMContentLoaded", function(){
 
 });
 
+
 var password = "";
 console.log("this is the password array: " + password)
 
-//---Generate Characters---//
+function random(arr){
+    var index = Math.floor(Math.random() * arr.length)
+    var indexEl = arr[index];
 
-// f() to generate Number Character
-function numChar(){
-    var numEl = document.getElementById("numbers");
-    if(numEl.checked){
-        return (String.fromCharCode(Math.floor(Math.random() * 10) + 48));
-    }
-    else(null)
-    password.push(result);
-};
-console.log(numChar());
+    return indexEl;
+}
 
-// f() to generate Lowercase Character
-function lowCase(){
-    var lowEl = document.getElementById("lowercase");
-    if(lowEl.checked){
-        return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
-    } else(null)
-};
-console.log(lowCase());
 
-// f() to generate Uppercase Character
-function upCase(){
-    var upEl = document.getElementById("uppercase");
-    if (upEl.checked){
-        return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
-    } else(null)
-};
-console.log(upCase());
+// Number Character
+var numChar = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 
-// f() to generate Special Character
-function specChar(){
-    var specEl = document.getElementById("special");
-    if (specEl.checked){
-        return String.fromCharCode(Math.floor(Math.random() * 10) + 33);
-    } else(null)
-};
-console.log(specChar());
+console.log(numChar);
+
+// Uppercase Character
+var upCase = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+console.log(upCase);
+
+// Lowercase Character
+var lowCase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+
+console.log(lowCase);
+
+// Special Characters
+var specChar = ["!", "@", "#", "$", "/", "?", "&", "%", "<", ">"]
+
+console.log(specChar);
         
 
 //---Generate Password---//
-
-$('#gen-btn').click(function(){
-    genPassword();
-    console.log(genPassword())
-})
-
 function genPassword(){
-    console.log(numChar());
-    console.log(lowCase());
-    console.log(upCase());
-    console.log(specChar());
-}
-console.log(genPassword())
+    var passList = [];
+    var charList = [];
 
-function createPassword(){
-    var lengthEl = document.getElementById('length').value;
-    var i = 0;
-    while(i < lengthEl){
-        console.log(genPassword());
+    var options = passPrompts();
+    console.log(options)
+    console.log(options.length)
+
+    if(options.hasNumbers){
+        passList = passList.concat(numChar);
     }
-};
+    if(options.hasUppercase){
+        passList = passList.concat(upCase);
+    }
+    if(options.hasLowercase){
+        passList = passList.concat(lowCase);
+    }
+    if(options.hasSpecial){
+        passList = passList.concat(specChar);
+    }
+    console.log(passList);
+
+
+    for(var i = 0; i < options.length; i++){
+        var charList = passList[Math.floor(Math.random() * passList.length)]
+    }
+
+    console.log(passList);
+    console.log(charList);
+    return passList.join('');
+}
+
+
+function passPrompts(){
+    var length = parseInt(prompt("Enter length between 8-128"));
+    var hasSpecial = confirm("Click OK to include special characters.")
+    var hasNumbers = confirm("Click OK to include numerical characters.")
+    var hasLowercase = confirm("Click OK to include lowercase characters.")
+    var hasUppercase = confirm("Click OK to include uppercase characters.")
+
+    var promptValues = {
+        length: length,
+        hasSpecial: hasSpecial,
+        hasNumbers: hasNumbers,
+        hasLowercase: hasLowercase,
+        hasUppercase: hasUppercase
+      };
+    console.log(promptValues)
+
+    return promptValues;
+}
+
+function passwordResult() {
+    var passRes = genPassword();
+    var result = document.getElementById("result");
+    console.log(passRes);
+    result.value = passRes;
+}
+
 
 
 // Copy to Clipboard button
-
-
-
-// Password Generation button
-
-// $(document).ready(function(){
-//     var genbtn = document.getElementById("gen-btn");
-//     $(genbtn).on("click", function(){
-//         var passResult = document.getElementById("result");
-//         createPassword(passResult);
-//     });
-// })
+function copyToClipboard(str) {
+        const el = document.createElement('textarea');
+        el.value = str;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand('copy');
+        document.body.removeChild(el);
+  }

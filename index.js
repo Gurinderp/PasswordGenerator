@@ -68,12 +68,14 @@ function genPassword(){
 
 
     for(var i = 0; i < options.length; i++){
-        var charList = passList[Math.floor(Math.random() * passList.length)]
+        var charList = passList[Math.floor(Math.random() * passList.length)];
+
+        result.push(charList);
     }
 
     console.log(passList);
     console.log(charList);
-    return passList.join('');
+    return charList.join('');
 }
 
 
